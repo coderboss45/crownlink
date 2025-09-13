@@ -26,6 +26,8 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import Courses from "./pages/Courses";
 import Course from "./pages/Course";
 import Contact from "./pages/Contact";
+import Settings from "./pages/Settings";
+import LearnerProgress from "./pages/learner/progress";
 import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,7 @@ const App = () => (
             <Route path="/admin/enrollments" element={<AdminEnrollments />} />
             <Route path="/learner" element={<LearnerDashboard />} />
             <Route path="/learner/payments" element={<LearnerPayments />} />
+            <Route path="/learner/progress" element={<LearnerProgress />} />
             <Route path="/employer" element={<EmployerDashboard />} />
             <Route path="/employer/enroll" element={<EmployerEnroll />} />
             <Route path="/employer/payments" element={<EmployerPayments />} />
@@ -57,6 +60,7 @@ const App = () => (
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:id" element={<Course />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

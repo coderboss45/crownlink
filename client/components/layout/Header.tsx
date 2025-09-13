@@ -99,7 +99,11 @@ export default function Header() {
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent" />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2F63a3c6fc0a3f4008855a3fca5a15d24a%2Fc74c4ca8ca5d4011ae8b79c2e033472e?format=webp&width=800"
+            alt="Crownlinks Academy Logo"
+            className="h-8 w-auto"
+          />
           <span className="text-lg font-bold tracking-tight">
             Crownlinks Academy
           </span>

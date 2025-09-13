@@ -54,9 +54,9 @@ export default function DashboardShell({
           ];
 
   const roleColors = {
-    admin: "from-red-500 to-orange-500",
-    learner: "from-blue-500 to-indigo-500", 
-    employer: "from-purple-500 to-violet-500"
+    admin: "from-primary to-accent",
+    learner: "from-primary to-accent",
+    employer: "from-primary to-accent",
   };
 
   return (
@@ -72,19 +72,19 @@ export default function DashboardShell({
           {/* Sidebar Header */}
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between">
-              {!sidebarCollapsed && (
-                <div className="flex items-center gap-3">
-                  <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${roleColors[role]} shadow-lg flex items-center justify-center`}>
-                    <div className="text-white text-sm font-bold">
-                      {role === "admin" ? "A" : role === "learner" ? "L" : "E"}
-                    </div>
-                  </div>
+              <div className="flex items-center gap-3">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F63a3c6fc0a3f4008855a3fca5a15d24a%2Fc74c4ca8ca5d4011ae8b79c2e033472e?format=webp&width=800"
+                  alt="Crownlinks Logo"
+                  className={cn("h-8 w-auto transition-all", sidebarCollapsed ? "opacity-100" : "opacity-100")}
+                />
+                {!sidebarCollapsed && (
                   <div>
                     <div className="text-sm font-semibold text-gray-900 capitalize">{role} Panel</div>
                     <div className="text-xs text-gray-500">Welcome back</div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
@@ -99,25 +99,38 @@ export default function DashboardShell({
           {/* Navigation */}
           <nav className="flex-1 p-4">
             <div className="space-y-2">
-              {items.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    cn(
-                      "flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200",
-                      "hover:bg-gray-100 hover:shadow-sm",
-                      isActive 
-                        ? `bg-gradient-to-r ${roleColors[role]} text-white shadow-lg` 
-                        : "text-gray-700"
-                    )
-                  }
-                  title={sidebarCollapsed ? item.label : ""}
-                >
-                  <item.icon className="h-5 w-5 flex-shrink-0" />
-                  {!sidebarCollapsed && <span>{item.label}</span>}
-                </NavLink>
-              ))}
+              {items.map((item) => {
+                const end = item.to === "/admin" || item.to === "/learner" || item.to === "/employer";
+                return (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={end}
+                    className={({ isActive }) =>
+                      cn(
+                        "relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200",
+                        "hover:bg-gray-100 hover:shadow-sm",
+                        isActive ? "bg-white text-gray-900" : "text-gray-700"
+                      )
+                    }
+                    title={sidebarCollapsed ? item.label : ""}
+                  >
+                    {/* Active color bar */}
+                    <span
+                      className={cn(
+                        "absolute left-0 top-0 h-full w-1 rounded-r",
+                        "bg-gradient-to-b from-primary to-accent",
+                        "transition-all",
+                        "opacity-0",
+                        "data-[active=true]:opacity-100"
+                      )}
+                      data-active
+                    />
+                    <item.icon className="h-5 w-5 flex-shrink-0" />
+                    {!sidebarCollapsed && <span>{item.label}</span>}
+                  </NavLink>
+                );
+              })}
             </div>
           </nav>
 
