@@ -110,6 +110,7 @@ export default function DashboardShell({
                       cn(
                         "relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200",
                         "hover:bg-gray-100 hover:shadow-sm",
+                        "before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-r before:bg-gradient-to-b before:from-primary before:to-accent before:opacity-0 aria-[current=page]:before:opacity-100",
                         isActive ? "bg-white text-gray-900" : "text-gray-700"
                       )
                     }
