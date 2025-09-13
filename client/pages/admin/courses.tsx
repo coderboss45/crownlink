@@ -32,7 +32,15 @@ export default function AdminCourses() {
     if (res.ok) {
       const c = await res.json();
       setCourses((prev) => [c, ...prev]);
-      setForm({ title: "", description: "", priceCents: 0, duration: "", whatYouWillLearn: "", whoIsFor: "", published: true });
+      setForm({
+        title: "",
+        description: "",
+        priceCents: 0,
+        duration: "",
+        whatYouWillLearn: "",
+        whoIsFor: "",
+        published: true,
+      });
     }
   };
 
@@ -53,13 +61,17 @@ export default function AdminCourses() {
               className="min-h-24 rounded-md border bg-background px-3 py-2"
               placeholder="Description (overview)"
               value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
             />
             <textarea
               className="min-h-24 rounded-md border bg-background px-3 py-2"
               placeholder={"What you'll learn (one per line)"}
               value={form.whatYouWillLearn}
-              onChange={(e) => setForm({ ...form, whatYouWillLearn: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, whatYouWillLearn: e.target.value })
+              }
             />
             <textarea
               className="min-h-24 rounded-md border bg-background px-3 py-2"
@@ -74,7 +86,13 @@ export default function AdminCourses() {
               onChange={(e) => setForm({ ...form, duration: e.target.value })}
             />
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} />
+              <input
+                type="checkbox"
+                checked={form.published}
+                onChange={(e) =>
+                  setForm({ ...form, published: e.target.checked })
+                }
+              />
               <span>Published</span>
             </label>
             <input

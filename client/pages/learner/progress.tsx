@@ -41,13 +41,25 @@ export default function LearnerProgress() {
       });
       const json = await res.json();
       if (json?.enrollment) {
-        setEnrollments((prev) => prev.map((e) => (e.id === id ? { ...e, ...json.enrollment } : e)));
+        setEnrollments((prev) =>
+          prev.map((e) => (e.id === id ? { ...e, ...json.enrollment } : e)),
+        );
       }
     } catch {}
   };
 
-  if (loading) return (<DashboardShell role="learner"><p>Loading progress...</p></DashboardShell>);
-  if (error) return (<DashboardShell role="learner"><p className="text-red-600">{error}</p></DashboardShell>);
+  if (loading)
+    return (
+      <DashboardShell role="learner">
+        <p>Loading progress...</p>
+      </DashboardShell>
+    );
+  if (error)
+    return (
+      <DashboardShell role="learner">
+        <p className="text-red-600">{error}</p>
+      </DashboardShell>
+    );
 
   return (
     <DashboardShell role="learner">
@@ -58,13 +70,21 @@ export default function LearnerProgress() {
         <div className="space-y-4">
           {enrollments.map((e) => {
             const course = courses.find((c) => c.id === e.courseId);
-            const pct = typeof e.progressPercent === "number" ? e.progressPercent : 0;
+            const pct =
+              typeof e.progressPercent === "number" ? e.progressPercent : 0;
             return (
-              <div key={e.id} className="rounded-xl border bg-card p-4 shadow-sm">
+              <div
+                key={e.id}
+                className="rounded-xl border bg-card p-4 shadow-sm"
+              >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-semibold">{course?.title ?? e.courseId}</div>
-                    <div className="text-xs text-muted-foreground capitalize">{e.status || "in_progress"}</div>
+                    <div className="font-semibold">
+                      {course?.title ?? e.courseId}
+                    </div>
+                    <div className="text-xs text-muted-foreground capitalize">
+                      {e.status || "in_progress"}
+                    </div>
                   </div>
                   <div className="w-32 text-right">
                     <div className="text-sm font-medium">{pct}%</div>
@@ -74,7 +94,9 @@ export default function LearnerProgress() {
                   <Progress value={pct} className="h-2" />
                 </div>
                 <div className="mt-3 flex gap-2">
-                  <Button variant="outline" onClick={() => refresh(e.id)}>Sync Progress</Button>
+                  <Button variant="outline" onClick={() => refresh(e.id)}>
+                    Sync Progress
+                  </Button>
                 </div>
               </div>
             );

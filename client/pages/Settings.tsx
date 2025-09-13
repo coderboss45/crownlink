@@ -21,10 +21,17 @@ export default function Settings() {
       });
       setSent(true);
       const { toast } = await import("@/hooks/use-toast");
-      toast({ title: "Email sent", description: "Check your inbox for a reset link." });
+      toast({
+        title: "Email sent",
+        description: "Check your inbox for a reset link.",
+      });
     } catch (e: any) {
       const { toast } = await import("@/hooks/use-toast");
-      toast({ title: "Failed", description: e?.message || "Unable to send reset email", variant: "destructive" });
+      toast({
+        title: "Failed",
+        description: e?.message || "Unable to send reset email",
+        variant: "destructive",
+      });
     } finally {
       setSending(false);
     }
@@ -37,30 +44,50 @@ export default function Settings() {
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Profile</h2>
-          <p className="text-sm text-muted-foreground mb-4">Your account information</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Your account information
+          </p>
           <div className="space-y-3">
             <div>
               <div className="text-xs text-muted-foreground">Name</div>
-              <input className="mt-1 w-full rounded-md border px-3 py-2" value={user?.name || ""} readOnly />
+              <input
+                className="mt-1 w-full rounded-md border px-3 py-2"
+                value={user?.name || ""}
+                readOnly
+              />
             </div>
             <div>
               <div className="text-xs text-muted-foreground">Username</div>
-              <input className="mt-1 w-full rounded-md border px-3 py-2" value={user?.username || ""} readOnly />
+              <input
+                className="mt-1 w-full rounded-md border px-3 py-2"
+                value={user?.username || ""}
+                readOnly
+              />
             </div>
             <div>
               <div className="text-xs text-muted-foreground">Email</div>
-              <input className="mt-1 w-full rounded-md border px-3 py-2" value={user?.email || ""} readOnly />
+              <input
+                className="mt-1 w-full rounded-md border px-3 py-2"
+                value={user?.email || ""}
+                readOnly
+              />
             </div>
             <div>
               <div className="text-xs text-muted-foreground">Role</div>
-              <input className="mt-1 w-full rounded-md border px-3 py-2 capitalize" value={user?.role || ""} readOnly />
+              <input
+                className="mt-1 w-full rounded-md border px-3 py-2 capitalize"
+                value={user?.role || ""}
+                readOnly
+              />
             </div>
           </div>
         </div>
 
         <div className="rounded-xl border bg-card p-6 shadow-sm">
           <h2 className="text-lg font-semibold">Password</h2>
-          <p className="text-sm text-muted-foreground mb-4">Send a password reset email to your account address.</p>
+          <p className="text-sm text-muted-foreground mb-4">
+            Send a password reset email to your account address.
+          </p>
           <Button onClick={sendReset} disabled={!user?.email || sending}>
             {sending ? "Sending..." : sent ? "Email sent" : "Send reset email"}
           </Button>

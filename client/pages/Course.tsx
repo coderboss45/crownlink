@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function CoursePage() {
   const { id } = useParams();
@@ -89,7 +94,9 @@ export default function CoursePage() {
                 <AccordionItem value="overview">
                   <AccordionTrigger>Overview</AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-muted-foreground whitespace-pre-line">{course.description}</p>
+                    <p className="text-muted-foreground whitespace-pre-line">
+                      {course.description}
+                    </p>
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="learn">
@@ -123,7 +130,10 @@ export default function CoursePage() {
                   <AccordionContent>
                     <div className="grid gap-2 text-sm">
                       <div>Duration: {course.duration || "Self-paced"}</div>
-                      <div>Amount: £{((course.priceCents || 0) / 100).toFixed(2)} GBP</div>
+                      <div>
+                        Amount: £{((course.priceCents || 0) / 100).toFixed(2)}{" "}
+                        GBP
+                      </div>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -132,8 +142,12 @@ export default function CoursePage() {
           </div>
           <aside className="rounded-md border p-6">
             <div className="text-xl font-semibold">Enroll</div>
-            <div className="text-sm text-muted-foreground mt-2">{course.duration}</div>
-            <div className="mt-2 text-lg font-semibold">£{((course.priceCents || 0) / 100).toFixed(2)} GBP</div>
+            <div className="text-sm text-muted-foreground mt-2">
+              {course.duration}
+            </div>
+            <div className="mt-2 text-lg font-semibold">
+              £{((course.priceCents || 0) / 100).toFixed(2)} GBP
+            </div>
             <div className="mt-4">
               <Button onClick={buy}>Buy with Stripe</Button>
             </div>

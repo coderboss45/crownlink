@@ -110,12 +110,24 @@ export class CoursesController {
       if (user && course && course.moodleCourseId) {
         // attempt to create/update moodle user and enrol
         try {
-          await this.moodle.createOrUpdateUserByEmail({ username: user.email.split("@")[0], password: Math.random().toString(36).slice(2), email: user.email, firstname: user.name || user.username, lastname: "", role: user.role });
-          const md = await this.moodle.getUserByField('email', user.email);
-          const moodleUserId = md && Array.isArray(md) && md.length ? md[0].id : null;
+          await this.moodle.createOrUpdateUserByEmail({
+            username: user.email.split("@")[0],
+            password: Math.random().toString(36).slice(2),
+            email: user.email,
+            firstname: user.name || user.username,
+            lastname: "",
+            role: user.role,
+          });
+          const md = await this.moodle.getUserByField("email", user.email);
+          const moodleUserId =
+            md && Array.isArray(md) && md.length ? md[0].id : null;
           if (moodleUserId) {
-            const roleId = Number(process.env.MOODLE_STUDENT_ROLE_ID || '5');
-            await this.moodle.enrolUser(moodleUserId, course.moodleCourseId, roleId);
+            const roleId = Number(process.env.MOODLE_STUDENT_ROLE_ID || "5");
+            await this.moodle.enrolUser(
+              moodleUserId,
+              course.moodleCourseId,
+              roleId,
+            );
           }
         } catch (e) {}
       }

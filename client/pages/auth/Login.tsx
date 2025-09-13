@@ -62,10 +62,12 @@ export default function Login() {
       const { toast } = await import("@/hooks/use-toast");
 
       if (res.ok) {
-
         await refresh();
-        
-        toast({ title: "Logged in", description: "Welcome back! Redirecting to your dashboard..." });
+
+        toast({
+          title: "Logged in",
+          description: "Welcome back! Redirecting to your dashboard...",
+        });
 
         if (returnTo) {
           const path = returnTo.startsWith("/") ? returnTo : `/${returnTo}`;
@@ -80,14 +82,19 @@ export default function Login() {
           json = await res.json();
         } catch {}
         const isPending =
-          res.status === 403 || json?.error === "pending_verification" || json?.pending === true;
+          res.status === 403 ||
+          json?.error === "pending_verification" ||
+          json?.pending === true;
         if (isPending) {
           toast({
             title: "Verify your email",
             description: "Please enter the 6-digit code sent to your email.",
           });
-          const userParam = (json && (json.username || json.email)) || username || email;
-          navigate(`/auth/verify-otp?username=${encodeURIComponent(userParam)}`);
+          const userParam =
+            (json && (json.username || json.email)) || username || email;
+          navigate(
+            `/auth/verify-otp?username=${encodeURIComponent(userParam)}`,
+          );
           return;
         }
         const errorMessage = (json && json.error) || "Login failed";

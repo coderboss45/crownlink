@@ -2,11 +2,11 @@ import { ReactNode, useMemo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Header from "./Header";
-import { 
-  ShieldCheck, 
-  GraduationCap, 
-  Users, 
-  X, 
+import {
+  ShieldCheck,
+  GraduationCap,
+  Users,
+  X,
   Menu,
   BarChart3,
   BookOpen,
@@ -17,7 +17,7 @@ import {
   Settings,
   HelpCircle,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -65,10 +65,12 @@ export default function DashboardShell({
 
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className={cn(
-          "hidden md:flex flex-col bg-white/80 backdrop-blur-sm border-r border-gray-200 shadow-sm transition-all duration-300 ease-in-out",
-          sidebarCollapsed ? "w-16" : "w-64"
-        )}>
+        <aside
+          className={cn(
+            "hidden md:flex flex-col bg-white/80 backdrop-blur-sm border-r border-gray-200 shadow-sm transition-all duration-300 ease-in-out",
+            sidebarCollapsed ? "w-16" : "w-64",
+          )}
+        >
           {/* Sidebar Header */}
           <div className="p-4 border-b border-gray-200">
             <div className="flex items-center justify-between">
@@ -76,11 +78,16 @@ export default function DashboardShell({
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2F63a3c6fc0a3f4008855a3fca5a15d24a%2Fc74c4ca8ca5d4011ae8b79c2e033472e?format=webp&width=800"
                   alt="Crownlinks Logo"
-                  className={cn("h-8 w-auto transition-all", sidebarCollapsed ? "opacity-100" : "opacity-100")}
+                  className={cn(
+                    "h-8 w-auto transition-all",
+                    sidebarCollapsed ? "opacity-100" : "opacity-100",
+                  )}
                 />
                 {!sidebarCollapsed && (
                   <div>
-                    <div className="text-sm font-semibold text-gray-900 capitalize">{role} Panel</div>
+                    <div className="text-sm font-semibold text-gray-900 capitalize">
+                      {role} Panel
+                    </div>
                     <div className="text-xs text-gray-500">Welcome back</div>
                   </div>
                 )}
@@ -91,7 +98,11 @@ export default function DashboardShell({
                 onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                 className="hover:bg-gray-100 rounded-lg h-8 w-8 p-0"
               >
-                {sidebarCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+                {sidebarCollapsed ? (
+                  <ChevronRight className="h-4 w-4" />
+                ) : (
+                  <ChevronLeft className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -100,7 +111,10 @@ export default function DashboardShell({
           <nav className="flex-1 p-4">
             <div className="space-y-2">
               {items.map((item) => {
-                const end = item.to === "/admin" || item.to === "/learner" || item.to === "/employer";
+                const end =
+                  item.to === "/admin" ||
+                  item.to === "/learner" ||
+                  item.to === "/employer";
                 return (
                   <NavLink
                     key={item.to}
@@ -111,7 +125,7 @@ export default function DashboardShell({
                         "relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200",
                         "hover:bg-gray-100 hover:shadow-sm",
                         "before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-r before:bg-gradient-to-b before:from-primary before:to-accent before:opacity-0 aria-[current=page]:before:opacity-100",
-                        isActive ? "bg-white text-gray-900" : "text-gray-700"
+                        isActive ? "bg-white text-gray-900" : "text-gray-700",
                       )
                     }
                     title={sidebarCollapsed ? item.label : ""}
@@ -177,9 +191,7 @@ export default function DashboardShell({
         {/* Main Content */}
         <main className="flex-1 overflow-hidden">
           <div className="h-full p-6 md:p-8">
-            <div className="mx-auto max-w-7xl space-y-8">
-              {children}
-            </div>
+            <div className="mx-auto max-w-7xl space-y-8">{children}</div>
           </div>
         </main>
       </div>
