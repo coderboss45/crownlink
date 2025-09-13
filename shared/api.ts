@@ -8,10 +8,14 @@ export interface User {
 export interface Course {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   priceCents: number;
   moodleCourseId?: number;
   published: boolean;
+  duration?: string;
+  whatYouWillLearn?: string; // newline-separated bullet points
+  whoIsFor?: string; // newline-separated bullet points
+  img?: string;
 }
 
 export interface Enrollment {

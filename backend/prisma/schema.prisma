@@ -41,6 +41,10 @@ model Course {
   moodleCourseId    Int?
   published         Boolean  @default(false)
   createdAt         DateTime @default(now())
+  duration          String?
+  whatYouWillLearn  String?
+  whoIsFor          String?
+  img               String?
   enrollments       Enrollment[]
 }
 
@@ -61,7 +65,7 @@ model Payment {
   user        User     @relation(fields: [userId], references: [id])
   userId      String
   amountCents Int
-  currency    String  @default("usd")
+  currency    String  @default("gbp")
   status      PaymentStatus @default(pending)
   provider    String
   providerId  String?

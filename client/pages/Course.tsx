@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function CoursePage() {
   const { id } = useParams();
@@ -76,7 +77,6 @@ export default function CoursePage() {
         <div className="grid gap-8 md:grid-cols-3">
           <div className="md:col-span-2">
             <h1 className="text-3xl font-bold">{course.title}</h1>
-            <p className="text-muted-foreground mt-2">{course.description}</p>
             <div className="mt-6">
               <img
                 src={course.img || "/images/course-1.svg"}
@@ -84,15 +84,56 @@ export default function CoursePage() {
                 alt={course.title}
               />
             </div>
+            <div className="mt-6 rounded-lg border bg-card">
+              <Accordion type="single" collapsible>
+                <AccordionItem value="overview">
+                  <AccordionTrigger>Overview</AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-muted-foreground whitespace-pre-line">{course.description}</p>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="learn">
+                  <AccordionTrigger>What you'll learn</AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="list-disc pl-5 space-y-1">
+                      {(course.whatYouWillLearn || "")
+                        .split("\n")
+                        .filter((s: string) => s.trim().length)
+                        .map((s: string, i: number) => (
+                          <li key={i}>{s}</li>
+                        ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="audience">
+                  <AccordionTrigger>Who this course is for</AccordionTrigger>
+                  <AccordionContent>
+                    <ul className="list-disc pl-5 space-y-1">
+                      {(course.whoIsFor || "")
+                        .split("\n")
+                        .filter((s: string) => s.trim().length)
+                        .map((s: string, i: number) => (
+                          <li key={i}>{s}</li>
+                        ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="details">
+                  <AccordionTrigger>Details</AccordionTrigger>
+                  <AccordionContent>
+                    <div className="grid gap-2 text-sm">
+                      <div>Duration: {course.duration || "Self-paced"}</div>
+                      <div>Amount: £{((course.priceCents || 0) / 100).toFixed(2)} GBP</div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
           <aside className="rounded-md border p-6">
             <div className="text-xl font-semibold">Enroll</div>
-            <div className="text-sm text-muted-foreground mt-2">
-              {course.duration}
-            </div>
-            <div className="mt-2 text-lg font-semibold">
-              £{((course.priceCents || 0) / 100).toFixed(2)} GBP
-            </div>
+            <div className="text-sm text-muted-foreground mt-2">{course.duration}</div>
+            <div className="mt-2 text-lg font-semibold">£{((course.priceCents || 0) / 100).toFixed(2)} GBP</div>
             <div className="mt-4">
               <Button onClick={buy}>Buy with Stripe</Button>
             </div>

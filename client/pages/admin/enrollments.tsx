@@ -14,7 +14,7 @@ export default function AdminEnrollments() {
     fetch(api("/api/admin/enrollments"), { credentials: "include" })
       .then((r) => r.json())
       .then(setEnrollments);
-    fetch(api("/users"))
+    fetch(api("/api/users"))
       .then((r) => r.json())
       .then(setUsers);
     fetch(api("/api/courses"))

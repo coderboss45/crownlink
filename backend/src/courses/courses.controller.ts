@@ -48,6 +48,10 @@ export class CoursesController {
       priceCents?: number;
       published?: boolean;
       moodleCourseId?: number;
+      duration?: string;
+      whatYouWillLearn?: string;
+      whoIsFor?: string;
+      img?: string;
     },
   ) {
     if (req.user.role !== "admin") throw new ForbiddenException();
@@ -56,8 +60,12 @@ export class CoursesController {
         title: body.title,
         description: body.description || "",
         priceCents: body.priceCents || 0,
-        published: !!body.published,
+        published: body.published ?? true,
         moodleCourseId: body.moodleCourseId,
+        duration: body.duration,
+        whatYouWillLearn: body.whatYouWillLearn,
+        whoIsFor: body.whoIsFor,
+        img: body.img,
       },
     });
     return course;
