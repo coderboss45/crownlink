@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" rx="16" fill="#eef2ff"/>
+  <g transform="translate(40,40)">
+    <rect width="720" height="520" rx="12" fill="#fff" stroke="#e6e7ef"/>
+    <text x="30" y="80" font-family="Inter, Arial, sans-serif" font-size="36" fill="#4f46e5">Advanced TypeScript</text>
+    <text x="30" y="140" font-family="Inter, Arial, sans-serif" font-size="18" fill="#6b7280">Generics, utilities and patterns</text>
+  </g>
+</svg>

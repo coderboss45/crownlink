@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" rx="16" fill="#f8fafc"/>
+  <g transform="translate(40,40)">
+    <rect width="720" height="520" rx="12" fill="#fff" stroke="#e6edf3"/>
+    <text x="30" y="80" font-family="Inter, Arial, sans-serif" font-size="36" fill="#1e293b">UX & Design</text>
+    <text x="30" y="140" font-family="Inter, Arial, sans-serif" font-size="18" fill="#6b7280">Research and prototyping</text>
+  </g>
+</svg>
