@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/context/AuthContext";
-import Link from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -76,18 +75,22 @@ export default function Login() {
 
         navigate("/learner");
       } else {
-        const json = await res.json();
-        if (json?.error === "pending_verification") {
+        let json: any = null;
+        try {
+          json = await res.json();
+        } catch {}
+        const isPending =
+          res.status === 403 || json?.error === "pending_verification" || json?.pending === true;
+        if (isPending) {
           toast({
             title: "Verify your email",
             description: "Please enter the 6-digit code sent to your email.",
           });
-          navigate(
-            `/auth/verify-otp?username=${encodeURIComponent(json.username || username || email)}`,
-          );
+          const userParam = (json && (json.username || json.email)) || username || email;
+          navigate(`/auth/verify-otp?username=${encodeURIComponent(userParam)}`);
           return;
         }
-        const errorMessage = json.error || "Login failed";
+        const errorMessage = (json && json.error) || "Login failed";
         setError(errorMessage);
         toast({
           title: "Login failed",
