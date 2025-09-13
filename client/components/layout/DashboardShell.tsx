@@ -115,17 +115,6 @@ export default function DashboardShell({
                     }
                     title={sidebarCollapsed ? item.label : ""}
                   >
-                    {/* Active color bar */}
-                    <span
-                      className={cn(
-                        "absolute left-0 top-0 h-full w-1 rounded-r",
-                        "bg-gradient-to-b from-primary to-accent",
-                        "transition-all",
-                        "opacity-0",
-                        "data-[active=true]:opacity-100"
-                      )}
-                      data-active
-                    />
                     <item.icon className="h-5 w-5 flex-shrink-0" />
                     {!sidebarCollapsed && <span>{item.label}</span>}
                   </NavLink>
