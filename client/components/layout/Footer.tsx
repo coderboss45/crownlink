@@ -9,7 +9,6 @@ export default function Footer() {
               alt="Crownlinks Academy Logo"
               className="h-6 w-auto"
             />
-            <div className="text-lg font-bold">Crownlinks Academy</div>
           </div>
           <div className="text-sm text-muted-foreground">
             Professional courses for global teams

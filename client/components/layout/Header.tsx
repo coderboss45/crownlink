@@ -104,9 +104,6 @@ export default function Header() {
             alt="Crownlinks Academy Logo"
             className="h-8 w-auto"
           />
-          <span className="text-lg font-bold tracking-tight">
-            Crownlinks Academy
-          </span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {nav.map((n) => (
