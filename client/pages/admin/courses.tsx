@@ -10,6 +10,10 @@ export default function AdminCourses() {
     title: "",
     description: "",
     priceCents: 0,
+    duration: "",
+    whatYouWillLearn: "",
+    whoIsFor: "",
+    published: true,
   });
 
   useEffect(() => {
@@ -28,7 +32,7 @@ export default function AdminCourses() {
     if (res.ok) {
       const c = await res.json();
       setCourses((prev) => [c, ...prev]);
-      setForm({ title: "", description: "", priceCents: 0 });
+      setForm({ title: "", description: "", priceCents: 0, duration: "", whatYouWillLearn: "", whoIsFor: "", published: true });
     }
   };
 
@@ -47,12 +51,32 @@ export default function AdminCourses() {
             />
             <textarea
               className="min-h-24 rounded-md border bg-background px-3 py-2"
-              placeholder="Description"
+              placeholder="Description (overview)"
               value={form.description}
-              onChange={(e) =>
-                setForm({ ...form, description: e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
             />
+            <textarea
+              className="min-h-24 rounded-md border bg-background px-3 py-2"
+              placeholder={"What you'll learn (one per line)"}
+              value={form.whatYouWillLearn}
+              onChange={(e) => setForm({ ...form, whatYouWillLearn: e.target.value })}
+            />
+            <textarea
+              className="min-h-24 rounded-md border bg-background px-3 py-2"
+              placeholder={"Who this course is for (one per line)"}
+              value={form.whoIsFor}
+              onChange={(e) => setForm({ ...form, whoIsFor: e.target.value })}
+            />
+            <input
+              className="rounded-md border bg-background px-3 py-2"
+              placeholder="Duration (e.g., 6 weeks)"
+              value={form.duration}
+              onChange={(e) => setForm({ ...form, duration: e.target.value })}
+            />
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} />
+              <span>Published</span>
+            </label>
             <input
               type="number"
               className="rounded-md border bg-background px-3 py-2"
