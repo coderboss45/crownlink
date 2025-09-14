@@ -13,12 +13,12 @@ type User = {
 const AuthContext = createContext<{
   user: User;
   loading: boolean;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<User>;
   logout: () => Promise<void>;
 }>({
   user: null,
   loading: true,
-  refresh: async () => {},
+  refresh: async () => null,
   logout: async () => {},
 });
 
