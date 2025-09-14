@@ -31,9 +31,10 @@ export default function VerifyOtp() {
     });
     const { toast } = await import("@/hooks/use-toast");
     if (res.ok) {
-      await refresh();
+      const u = await refresh();
       toast({ title: "Verified", description: "Account created." });
-      navigate("/learner");
+      const { dashboardPathForRole } = await import("@/lib/auth");
+      navigate(dashboardPathForRole(u?.role || null));
     } else {
       const json = await res.json();
       toast({
