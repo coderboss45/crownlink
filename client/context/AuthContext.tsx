@@ -13,12 +13,12 @@ type User = {
 const AuthContext = createContext<{
   user: User;
   loading: boolean;
-  refresh: () => Promise<void>;
+  refresh: () => Promise<User>;
   logout: () => Promise<void>;
 }>({
   user: null,
   loading: true,
-  refresh: async () => {},
+  refresh: async () => null,
   logout: async () => {},
 });
 
@@ -27,20 +27,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const refresh = async () => {
+  const refresh = async (): Promise<User> => {
+    let nextUser: User = null;
     try {
       const res = await fetch(api("api/users/me"), { credentials: "include" });
       if (res.ok) {
         const json = await res.json();
         setUser(json);
+        nextUser = json;
       } else {
         setUser(null);
+        nextUser = null;
       }
     } catch (e) {
       setUser(null);
+      nextUser = null;
     } finally {
       setLoading(false);
     }
+    return nextUser;
   };
 
   useEffect(() => {

@@ -64,8 +64,8 @@ export default function Login() {
 
       if (res.ok) {
 
-        await refresh();
-        
+        const u = await refresh();
+
         toast({ title: "Logged in", description: "Welcome back! Redirecting to your dashboard..." });
 
         if (returnTo) {
@@ -74,7 +74,8 @@ export default function Login() {
           return;
         }
 
-        navigate("/learner");
+        const { dashboardPathForRole } = await import("@/lib/auth");
+        navigate(dashboardPathForRole(u?.role || null));
       } else {
         const json = await res.json();
         if (json?.error === "pending_verification") {

@@ -18,6 +18,7 @@ import LearnerPayments from "./pages/learner/payments";
 import EmployerDashboard from "./pages/employer/Index";
 import EmployerEnroll from "./pages/employer/enroll";
 import EmployerPayments from "./pages/employer/payments";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import VerifyOtp from "./pages/auth/VerifyOtp";
@@ -39,16 +40,86 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/courses" element={<AdminCourses />} />
-            <Route path="/admin/users" element={<AdminUsers />} />
-            <Route path="/admin/payments" element={<AdminPayments />} />
-            <Route path="/admin/enrollments" element={<AdminEnrollments />} />
-            <Route path="/learner" element={<LearnerDashboard />} />
-            <Route path="/learner/payments" element={<LearnerPayments />} />
-            <Route path="/employer" element={<EmployerDashboard />} />
-            <Route path="/employer/enroll" element={<EmployerEnroll />} />
-            <Route path="/employer/payments" element={<EmployerPayments />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowed={["admin"]}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/courses"
+              element={
+                <ProtectedRoute allowed={["admin"]}>
+                  <AdminCourses />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute allowed={["admin"]}>
+                  <AdminUsers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/payments"
+              element={
+                <ProtectedRoute allowed={["admin"]}>
+                  <AdminPayments />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/enrollments"
+              element={
+                <ProtectedRoute allowed={["admin"]}>
+                  <AdminEnrollments />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/learner"
+              element={
+                <ProtectedRoute allowed={["learner"]}>
+                  <LearnerDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/learner/payments"
+              element={
+                <ProtectedRoute allowed={["learner"]}>
+                  <LearnerPayments />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/employer"
+              element={
+                <ProtectedRoute allowed={["employer"]}>
+                  <EmployerDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/employer/enroll"
+              element={
+                <ProtectedRoute allowed={["employer"]}>
+                  <EmployerEnroll />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/employer/payments"
+              element={
+                <ProtectedRoute allowed={["employer"]}>
+                  <EmployerPayments />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/auth/signup" element={<Signup />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/verify-otp" element={<VerifyOtp />} />
